@@ -7,8 +7,8 @@ jobs:
       runs-on: ubuntu-20.04
       steps:
         - name: Login Docker
-          run: echo "${{ secrets.REPOSITORY_PASS }}" | docker login ${{secrets.REGISTRY_ENDPOINT}} -u "${{ secrets.REPOSITORY_USER }}" --password-stdin
-           #echo "{ \"auths\": { \"${{ secrets.registry_endpoint }}\": { \"auth\": \"$(echo ${{ secrets.registry_username }}:${{ secrets.registry_password }} | base64 )\" }}}" > password.txt
+          run: | #echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{secrets.REGISTRY_ENDPOINT}}" -u "${{ secrets.REPOSITORY_USER }}" --password-stdin
+            echo "{ \"auths\": { \"${{ secrets.REGISTRY_ENDPOINT }}\": { \"auth\": \"$(echo ${{ secrets.REPOSITORY_USER }}:${{ secrets.REPOSITORY_PASS }} | base64 )\" }}}" > password.txt
         
         - name: Docker pull
           run: docker pull tcr.tks.trueidc.com/crm/crm-backend:main
