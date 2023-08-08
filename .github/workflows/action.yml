@@ -7,10 +7,12 @@ jobs:
       runs-on: ubuntu-20.04
       steps:
         - name: Login Docker
-          run: |
-            echo ${{ secrets.registry_password }} > password.txt
-            cat password.txt | docker login ${{ secrets.registry_endpoint }} --username ${{ secrets.registry_username }} --password-stdin
-            docker pull tcr.tks.trueidc.com/crm/crm-backend:main
+          run: echo "${{ secrets.registry_password }}" | docker login secrets.registry_endpoint -u "${{ secrets.registry_username }}" --password-stdin
+           #echo "{ \"auths\": { \"${{ secrets.registry_endpoint }}\": { \"auth\": \"$(echo ${{ secrets.registry_username }}:${{ secrets.registry_password }} | base64 )\" }}}" > password.txt
+        
+        - name: Docker pull
+          run: docker pull tcr.tks.trueidc.com/crm/crm-backend:main
+          
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
