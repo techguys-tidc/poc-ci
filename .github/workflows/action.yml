@@ -7,7 +7,7 @@ jobs:
       runs-on: ubuntu-20.04
       steps:
         - name: Login Docker
-          run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{secrets.REGISTRY_ENDPOINT}} -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
+          run: echo "${{ secrets.REPOSITORY_PASS }}" | docker login ${{secrets.REGISTRY_ENDPOINT}} -u "${{ secrets.REPOSITORY_USER }}" --password-stdin
            #echo "{ \"auths\": { \"${{ secrets.registry_endpoint }}\": { \"auth\": \"$(echo ${{ secrets.registry_username }}:${{ secrets.registry_password }} | base64 )\" }}}" > password.txt
         
         - name: Docker pull
