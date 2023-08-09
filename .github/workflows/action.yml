@@ -8,7 +8,7 @@ jobs:
       steps:
         - name: Login Docker
           run: | #echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{secrets.REGISTRY_ENDPOINT}}" -u "${{ secrets.REPOSITORY_USER }}" --password-stdin
-            echo "{ \"auths\": { \"${{ secrets.REGISTRY_ENDPOINT }}\": { \"auth\": \"$(echo ${{ secrets.REPOSITORY_USER }}:${{ secrets.REPOSITORY_PASS }} | base64 )\" }}}" > password.txt
+            echo "{ \"auths\": { \"${{ secrets.REGISTRY_ENDPOINT }}\": { \"auth\": \"$(echo ${{ secrets.REPOSITORY_USER }}:${{ secrets.REPOSITORY_PASS }} | base64 )\" }}}" > ~/.docker/config.json
         
         - name: Docker pull
           run: docker pull tcr.tks.trueidc.com/crm/crm-backend:main
