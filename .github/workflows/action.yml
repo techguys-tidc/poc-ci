@@ -15,7 +15,7 @@ jobs:
           run: echo "a0gqGcYR0dP4xhZDgtqvY0sHi6sj85VM" | docker login "tcr.tks.trueidc.com" -u 'robot$cluster0' --password-stdin
         
         - name: Docker pull
-          run: docker pull tcr.tks.trueidc.com/crm/crm-backend:main
+          run: docker pull tcr.tks.trueidc.com/crm/crm-backend:vulner
           
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
