@@ -7,8 +7,7 @@ jobs:
       runs-on: ubuntu-20.04
       steps:
         - name: Login Docker
-          run: | #echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{secrets.REGISTRY_ENDPOINT}}" -u "${{ secrets.REPOSITORY_USER }}" --password-stdin
-            echo "{ \"auths\": { \"tcr.tks.trueidc.com\": { \"auth\": \"$(echo 'robot$cluster0:a0gqGcYR0dP4xhZDgtqvY0sHi6sj85VM' | base64 )\" }}}" > ~/.docker/config.json
+          run: echo "a0gqGcYR0dP4xhZDgtqvY0sHi6sj85VM" | docker login "tcr.tks.trueidc.com" -u "robot$cluster0" --password-stdin
         
         - name: Docker pull
           run: docker pull tcr.tks.trueidc.com/crm/crm-backend:main
