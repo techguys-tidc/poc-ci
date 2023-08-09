@@ -9,8 +9,20 @@ jobs:
 #        actions: read
 #        contents: read
 #        security-events: write
- #     permissions: write-all
+      permissions: write-all
       steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
+        - name: Run Trivy vulnerability scanner in fs mode
+          uses: aquasecurity/trivy-action@master
+          with:
+            scan-type: 'fs'
+            scan-ref: '.'
+            output: trivy-report.html
+            template: "@.github/report-template.html"
+            format: template
+      
         - name: Login Docker
           run: echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{ secrets.REGISTRY_ENDPOINT }}" -u '${{ secrets.REPOSITORY_USER }}' --password-stdin
         
