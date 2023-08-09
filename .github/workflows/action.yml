@@ -19,7 +19,10 @@ jobs:
           #  image-ref: '${{ secrets.registry_endpoint }}/${{secrets.registry_team}}/${{secrets.registry_project}}:main'
             format: 'sarif'
             output: 'trivy-results.sarif'
-  
+            
+        - name: list file
+          run: ls -l
+          
         - name: Upload Trivy scan results to GitHub Security tab
           uses: github/codeql-action/upload-sarif@v2
           with:
