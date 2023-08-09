@@ -20,7 +20,7 @@ jobs:
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
-            image-ref: tcr.tks.trueidc.com/crm/crm-backend:main
+            image-ref: tcr.tks.trueidc.com/crm/crm-backend:vulner
           #  image-ref: '${{ secrets.registry_endpoint }}/${{secrets.registry_team}}/${{secrets.registry_project}}:main'
             format: 'sarif'
             output: 'trivy-results.sarif'
