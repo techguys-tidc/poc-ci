@@ -22,7 +22,7 @@ jobs:
             username: ${{ secrets.registry_username }}
             password: ${{ secrets.registry_password }}
             tag: ${{ needs.setenv.outputs.tag_name }}
-            extra_args: tar-path=image.tar
+            extra_args: --tar-path=image.tar
             
         - name: Run Trivy vulnerability scanner in tar mode
           uses: aquasecurity/trivy-action@master
