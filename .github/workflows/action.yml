@@ -22,7 +22,7 @@ jobs:
             username: ${{ secrets.registry_username }}
             password: ${{ secrets.registry_password }}
             tag: ${{ needs.setenv.outputs.tag_name }}
-            extra_args: --tar-path image.tar
+            extra_args: --tar-path image.tar --no-push
             
         - name: Run Trivy vulnerability scanner in tar mode
           uses: aquasecurity/trivy-action@master
@@ -34,7 +34,16 @@ jobs:
             template: "@.github/report-template.html"
             format: template
 
-
+        - name: Kaniko build
+          uses: aevea/action-kaniko@master
+          with:
+            image: ${{secrets.registry_team}}/${{secrets.registry_project}}
+            registry: ${{ secrets.registry_endpoint }}
+            username: ${{ secrets.registry_username }}
+            password: ${{ secrets.registry_password }}
+            tag: ${{ needs.setenv.outputs.tag_name }}
+   #         extra_args: --tar-path image.tar --no-push
+            
 #        - name: Login Docker
   #        run: echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{ secrets.REGISTRY_ENDPOINT }}" -u '${{ secrets.REPOSITORY_USER }}' --password-stdin
   #      
