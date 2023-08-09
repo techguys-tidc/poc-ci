@@ -38,8 +38,8 @@ jobs:
      #       output: 'trivy-results.sarif'
 
             
-   #     - name: list file
-   #       run: ls -l;pwd
+        - name: list file
+          run: ls -l;pwd
           
   #      - name: Upload Trivy scan results to GitHub Security tab
   #        id: run-analysis
