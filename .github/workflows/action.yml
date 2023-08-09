@@ -12,7 +12,7 @@ jobs:
       permissions: write-all
       steps:
         - name: Login Docker
-          run: echo "a0gqGcYR0dP4xhZDgtqvY0sHi6sj85VM" | docker login "tcr.tks.trueidc.com" -u 'robot$cluster0' --password-stdin
+          run: echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{ secrets.REGISTRY_ENDPOINT }}" -u '${{ secrets.REPOSITORY_USER }}' --password-stdin
         
         - name: Docker pull
           run: docker pull tcr.tks.trueidc.com/crm/crm-backend:vulner
