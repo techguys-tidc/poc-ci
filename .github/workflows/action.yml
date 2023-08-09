@@ -23,31 +23,32 @@ jobs:
             template: "@.github/report-template.html"
             format: template
       
-        - name: Login Docker
-          run: echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{ secrets.REGISTRY_ENDPOINT }}" -u '${{ secrets.REPOSITORY_USER }}' --password-stdin
-        
-        - name: Docker pull
-          run: docker pull tcr.tks.trueidc.com/crm/crm-backend:vulner
-          
-        - name: Run Trivy vulnerability scanner
-          uses: aquasecurity/trivy-action@master
-          with:
-            image-ref: tcr.tks.trueidc.com/crm/crm-backend:vulner
+#        - name: Login Docker
+  #        run: echo "${{ secrets.REPOSITORY_PASS }}" | docker login "${{ secrets.REGISTRY_ENDPOINT }}" -u '${{ secrets.REPOSITORY_USER }}' --password-stdin
+  #      
+   #     - name: Docker pull
+   #       run: docker pull tcr.tks.trueidc.com/crm/crm-backend:vulner
+   #       
+   ###     - name: Run Trivy vulnerability scanner
+      #    uses: aquasecurity/trivy-action@master
+      #    with:
+      #      image-ref: tcr.tks.trueidc.com/crm/crm-backend:vulner
           #  image-ref: '${{ secrets.registry_endpoint }}/${{secrets.registry_team}}/${{secrets.registry_project}}:main'
-            format: 'sarif'
-            output: 'trivy-results.sarif'
+     #       format: 'sarif'
+     #       output: 'trivy-results.sarif'
+
             
-        - name: list file
-          run: ls -l;pwd
+   #     - name: list file
+   #       run: ls -l;pwd
           
-        - name: Upload Trivy scan results to GitHub Security tab
-          id: run-analysis
-          uses: github/codeql-action/upload-sarif@v2
-          with:
-            sarif_file: 'trivy-results.sarif'
+  #      - name: Upload Trivy scan results to GitHub Security tab
+  #        id: run-analysis
+  #        uses: github/codeql-action/upload-sarif@v2
+  #        with:
+  #          sarif_file: 'trivy-results.sarif'
             
         - name: Upload SARIF as an Artifact
           uses: actions/upload-artifact@v2
           with:
             name: sarif-file
-            path: 'trivy-results.sarif'
+            path: 'trivy-report.html'
