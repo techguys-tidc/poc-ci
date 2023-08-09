@@ -21,9 +21,15 @@ jobs:
             output: 'trivy-results.sarif'
             
         - name: list file
-          run: ls -l
+          run: ls -l;pwd
           
         - name: Upload Trivy scan results to GitHub Security tab
           uses: github/codeql-action/upload-sarif@v2
           with:
             sarif_file: 'trivy-results.sarif'
+            
+        - name: Upload SARIF as an Artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: sarif-file
+            path: 'trivy-results.sarif'
