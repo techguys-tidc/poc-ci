@@ -5,6 +5,10 @@ on:
 jobs:  
     trivy:
       runs-on: ubuntu-20.04
+      permissions:
+        actions: read
+        contents: read
+        security-events: write
       steps:
         - name: Login Docker
           run: echo "a0gqGcYR0dP4xhZDgtqvY0sHi6sj85VM" | docker login "tcr.tks.trueidc.com" -u 'robot$cluster0' --password-stdin
