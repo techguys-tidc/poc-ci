@@ -17,11 +17,7 @@ jobs:
         - name: Kaniko build
           uses: aevea/action-kaniko@master
           with:
-            image: ${{secrets.registry_team}}/${{secrets.registry_project}}
-            registry: ${{ secrets.registry_endpoint }}
-            username: ${{ secrets.registry_username }}
-            password: ${{ secrets.registry_password }}
-            tag: ${{ needs.setenv.outputs.tag_name }}
+            image: test
             extra_args: "--tar-path image.tar --no-push"
             
         - name: Run Trivy vulnerability scanner in tar mode
